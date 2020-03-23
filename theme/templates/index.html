@@ -18,7 +18,11 @@
       <div class="col p-4 d-flex flex-column position-static">
         <strong class="d-inline-block mb-2 text-primary">{{ article.category }}</strong>
         <h3 class="mb-0">{{ article.title }}</h3>
-        <div class="mb-1 text-muted">{{ article.local_date }}</div>
+        <div class="mb-1 text-muted">{{ article.locale_date }}{% if article.tags %}
+        {% for tag in article.tags %}
+            <span class="badge badge-pill badge-light">#{{ tag }}</span>
+        {% endfor %}
+        {% endif %}</div>
         <p class="card-text mb-auto">{{ article.summary }}</p>
         <a href="{{ SITEURL }}/{{ article.url }}" class="stretched-link">Continue reading</a>
       </div>
