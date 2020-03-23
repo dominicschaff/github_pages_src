@@ -23,8 +23,14 @@
 <div class="row">
     <div class="col-md-8 blog-main">
       <div class="blog-post">
-        <h2 class="blog-post-title"><small class="text-muted">{{ article.category | title }} &gt; </small>{{ article.title }}</h2>
-        <p class="blog-post-meta">{{article.locale_date }}
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category | title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ article.title }}</li>
+          </ol>
+        </nav>
+        <h2 class="blog-post-title">{{ article.title }}</h2>
+        <p class="blog-post-meta">{{article.locale_date }}{% if article.modified %} <small class="text-muted">(Modified: {{ article.locale_modified }})</small>{% endif %}
     {% if article.tags %}
         {% for tag in article.tags %}
             <a class="badge badge-pill badge-light" href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>

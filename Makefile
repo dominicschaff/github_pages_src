@@ -47,6 +47,6 @@ serve:
 	$(PELICAN) -l $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 setup:
-	pip3 install --user --upgrade pelican markdown
+	pip3 install --user --upgrade pelican markdown pygments
 
 .PHONY: html help clean serve setup

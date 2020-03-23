@@ -44,3 +44,4 @@ AUTHOR_SAVE_AS = ''
 THEME = 'theme'
 
 
+# MARKDOWN = ['codehilite(noclasses=True, pygments_style=monokai)', 'extra']  # enable MD options
