@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block head %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        <meta charset="utf-8" />
+        {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+        {% endif %}
+        {% if FEED_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{%if FEED_ATOM_URL %}{{ FEED_ATOM_URL }}{% else %}{{ FEED_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_RSS_URL %}{{ FEED_RSS_URL }}{% else %}{{ FEED_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_ATOM and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_ATOM_URL %}{{ CATEGORY_FEED_ATOM_URL.format(slug=category.slug) }}{% else %}{{ CATEGORY_FEED_ATOM.format(slug=category.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_RSS and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_RSS_URL %}{{ CATEGORY_FEED_RSS_URL.format(slug=category.slug) }}{% else %}{{ CATEGORY_FEED_RSS.format(slug=category.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+        {% endif %}
+        {% if TAG_FEED_ATOM and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_ATOM_URL %}{{ TAG_FEED_ATOM_URL.format(slug=tag.slug) }}{% else %}{{ TAG_FEED_ATOM.format(slug=tag.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+        {% endif %}
+        {% if TAG_FEED_RSS and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_RSS_URL %}{{ TAG_FEED_RSS_URL.format(slug=tag.slug) }}{% else %}{{ TAG_FEED_RSS.format(slug=tag.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+        {% endif %}
+        {% endblock head %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body id="index" class="home">
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+        {% for title, link in MENUITEMS %}
+        <a class="p-2 text-dark" href="{{ link }}">{{ title }}</a>
+        {% endfor %}
+          {% for cat, null in categories %}
+            <a class="p-2 text-dark{% if cat == category %} active{% endif %}" href="{{ SITEURL }}/{{ cat.url }}">{{ cat|title }}</a>
+          {% endfor %}
+        <a class="p-2 text-dark" href="{{ SITEURL }}/tags.html">#Tags</a>
+  </nav>
+</div>
+<main role="main" class="flex-shrink-0">
+  <div class="container">
+    {% block header %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+  </div>
+</main>
+
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <span class="text-muted">
+      <a href="https://github.com/dominicschaff">GitHub</a>
+      | <a href="https://instagram.com/dominic.schaff">Instagram</a>
+      | Powered by <a href="http://getpelican.com/">Pelican</>
+    </span>
+  </div>
+</footer>
+</body>
+</html>

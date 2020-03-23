@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{SITENAME}} - {{ article.title | striptags }}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+
+  {% import 'translations.html' as translations with context %}
+  {% if translations.entry_hreflang(article) %}
+    {{ translations.entry_hreflang(article) }}
+  {% endif %}
+
+  {% if article.description %}
+    <meta name="description" content="{{article.description}}" />
+  {% endif %}
+
+  {% for tag in article.tags %}
+    <meta name="tags" content="{{tag}}" />
+  {% endfor %}
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 blog-main">
+      <div class="blog-post">
+        <h2 class="blog-post-title"><small class="text-muted">{{ article.category | title }} &gt; </small>{{ article.title }}</h2>
+        <p class="blog-post-meta">{{article.locale_date }}
+    {% if article.tags %}
+        {% for tag in article.tags %}
+            <a class="badge badge-pill badge-light" href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>
+        {% endfor %}
+        {% endif %}</p>
+        {{ article.content }}
+      </div>
+{% endblock %}

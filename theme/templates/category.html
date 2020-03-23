@@ -1,0 +1,7 @@
+{% extends "index.html" %}
+{% block title %}{{SITENAME}} - {{ category|striptags|title}}{% endblock %}
+
+{% block header %}
+<h1>{{ category|title }}</h1>
+{% endblock %}
+
